@@ -485,6 +485,8 @@ MonoBehaviour:
   isTouchBottom: 0
   isTouchLeft: 0
   isTouchRight: 0
+  maxShotDelay: 0.2
+  curShotDelay: 0
   bullObjA: {fileID: 2762379754342229508, guid: 6d02dbed13767644ea3a56828b5712e6, type: 3}
   bullObjB: {fileID: 8802029797923347295, guid: 59b882c27ea4eda429f90f8242d66f9e, type: 3}
 --- !u!212 &1438963751

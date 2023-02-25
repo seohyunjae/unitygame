@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public bool isTouchLeft;    
     public bool isTouchRight;
 
+    public float maxShotDelay;
+    public float curShotDelay;
+
     public GameObject bullObjA;
     public GameObject bullObjB;
 
@@ -25,6 +28,7 @@ public class Player : MonoBehaviour
     {
         Move();
         Fire();
+        Reload();
     }
 
 
@@ -54,13 +58,26 @@ public class Player : MonoBehaviour
 
     void Fire()
     {
+        if (!Input.GetButton("Fire2"))
+            return;
+
+        if (curShotDelay < maxShotDelay)
+            return;
+        
         GameObject bullet = Instantiate(bullObjA, transform.position, transform.rotation);
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
         rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+
+        curShotDelay = 0;
+
     }
 
+    void Reload()
+    {
+        curShotDelay += Time.deltaTime;
+    }
 
-
+     
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
