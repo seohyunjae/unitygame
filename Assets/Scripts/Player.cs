@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public bool isTouchLeft;    
     public bool isTouchRight;
 
+    public GameObject bullObjA;
+    public GameObject bullObjB;
 
     Animator anim;
 
@@ -20,6 +22,13 @@ public class Player : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
+    {
+        Move();
+        Fire();
+    }
+
+
+    void Move()
     {
         float h = Input.GetAxisRaw("Horizontal");
         if ((isTouchRight && h == 1) || (isTouchLeft && h == -1))
@@ -33,7 +42,7 @@ public class Player : MonoBehaviour
             v = 0;
         }
         Vector3 curPos = transform.position;
-        Vector3 nextPos = new Vector3(h, v, 0) * speed  * Time.deltaTime;
+        Vector3 nextPos = new Vector3(h, v, 0) * speed * Time.deltaTime;
 
         transform.position = curPos + nextPos;
 
@@ -41,9 +50,17 @@ public class Player : MonoBehaviour
         {
             anim.SetInteger("Input", (int)h);
         }
-
-
     }
+
+    void Fire()
+    {
+        GameObject bullet = Instantiate(bullObjA, transform.position, transform.rotation);
+        Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+        rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+    }
+
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
