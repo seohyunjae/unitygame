@@ -14,8 +14,7 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rigid = GetComponent<Rigidbody2D>();
-        rigid.velocity= Vector2.down*speed;
+     
     }
 
     void OnHit(int dmg)
